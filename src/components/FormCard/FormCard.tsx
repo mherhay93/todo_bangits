@@ -24,10 +24,11 @@ interface IProps {
 }
 
 const FormCard = ({addTodo}: IProps) => {
+    const initialValue:IValue = {title: '', description: '', date: dayjs(), id: ''}
     return (
         <div>
             <Formik
-                initialValues={{title: '', description: '', date: '', id: ''}}
+                initialValues={initialValue}
                 validationSchema={TodoSchema}
                 onSubmit={(values, {resetForm}) => {
                     values.id = uuidv4()
@@ -51,6 +52,7 @@ const FormCard = ({addTodo}: IProps) => {
                             <Field>
                                 <Input
                                     name="title"
+                                    placeholder="Title..."
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.title}
@@ -62,6 +64,7 @@ const FormCard = ({addTodo}: IProps) => {
                             <Field>
                                 <TextArea
                                     name="description"
+                                    placeholder="Description..."
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.description}
