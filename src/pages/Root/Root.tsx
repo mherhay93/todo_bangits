@@ -1,13 +1,14 @@
 import React from "react";
-import {RootWrapper} from "./root.style";
+import {WrapperComponent} from "./root.style";
 import Wrapper from "../../components/Layout/Wrapper";
+import FormCard from "../../components/FormCard/FormCard";
 
 const Root: React.FC = () => {
     return (
         <Wrapper>
-            <RootWrapper>
-                dsfsdfsd
-            </RootWrapper>
+            <WrapperComponent>
+                <FormCard/>
+            </WrapperComponent>
         </Wrapper>
     
     )

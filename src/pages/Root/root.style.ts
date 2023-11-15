@@ -1,5 +1,5 @@
 import styled from "styled-components";
+import {Card} from "antd";
 
-export const RootWrapper = styled.div`
- background: #61dafb;
+export const WrapperComponent = styled(Card)`
 `
