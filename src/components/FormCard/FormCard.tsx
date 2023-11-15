@@ -1,10 +1,15 @@
 import React from "react";
+import {connect} from "react-redux";
 import {Formik} from "formik";
 import {Button, Input} from "antd";
 import * as Yup from 'yup';
 import dayjs from "dayjs";
+import {v4 as uuidv4} from 'uuid';
+
+import {addItemTodo} from "../../redux/todo/todo";
 import DateTimePicker from "../helpers/DatePicker/DateTimePicker";
-import {Form, FormBody, Error, Field} from "./formCard.style";
+import {IValue} from "../../redux/types";
+import {Error, Field, Form, FormBody} from "./formCard.style";
 
 const {TextArea} = Input;
 
@@ -14,15 +19,20 @@ const TodoSchema = Yup.object().shape({
     date: Yup.string().required('Required')
 });
 
-const FormCard = () => {
+interface IProps {
+    addTodo: (val:IValue) => void
+}
+
+const FormCard = ({addTodo}: IProps) => {
     return (
         <div>
             <Formik
-                initialValues={{title: '', description: '', date: ''}}
+                initialValues={{title: '', description: '', date: '', id: ''}}
                 validationSchema={TodoSchema}
-                onSubmit={(values, {setSubmitting}) => {
-                    console.log('values ------->', values)
-                    setSubmitting(false)
+                onSubmit={(values, {resetForm}) => {
+                    values.id = uuidv4()
+                    addTodo(values)
+                    resetForm()
                 }}
             >
                 {({
@@ -63,7 +73,7 @@ const FormCard = () => {
                             </Field>
                             <DateTimePicker
                                 name="date"
-                                onChange={(date:dayjs.Dayjs | null, dateString:string) => setFieldValue("date", date)}
+                                onChange={(date:dayjs.Dayjs | null) => setFieldValue("date", date)}
                                 value={values.date}
                                 onBlur={handleBlur}
                             />
@@ -78,4 +88,11 @@ const FormCard = () => {
     )
 }
 
-export default FormCard;
+const mapDispatchToProps = (dispatch: any) => {
+
+    return {
+        addTodo: (val:IValue) => dispatch(addItemTodo(val))
+    }
+
+}
+export default connect(null, mapDispatchToProps)(FormCard);
