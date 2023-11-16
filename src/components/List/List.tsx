@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {IState, IValue} from "../../redux/types";
-import ListItem from "../helpers/ListItem/ListItem";
+import ListItem from "./ListItem/ListItem";
 import {WrapperList} from "./list.style";
 
 interface IProps {
@@ -21,6 +21,7 @@ const List = ({todoList}:IProps) => {
                     description={item.description}
                     title={item.title}
                     date={item.date}
+                    isChecked={item.isChecked}
                 />))}
         </WrapperList>
     )

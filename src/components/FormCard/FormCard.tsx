@@ -24,7 +24,7 @@ interface IProps {
 }
 
 const FormCard = ({addTodo}: IProps) => {
-    const initialValue:IValue = {title: '', description: '', date: dayjs(), id: ''}
+    const initialValue:IValue = {title: '', description: '', date: dayjs(), id: '', isChecked: false}
     return (
         <div>
             <Formik
@@ -32,6 +32,7 @@ const FormCard = ({addTodo}: IProps) => {
                 validationSchema={TodoSchema}
                 onSubmit={(values, {resetForm}) => {
                     values.id = uuidv4()
+                    values.isChecked = false
                     addTodo(values)
                     resetForm()
                 }}

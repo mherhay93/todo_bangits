@@ -8,7 +8,7 @@ export const WrapperChildren = styled.form`
 
 export const ChildrenBody = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
 `
 
@@ -20,10 +20,13 @@ export const WrapperHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  max-width: 80vw;
+  max-width: 46vw;
   overflow: hidden;
   white-space: pre-wrap;
   gap: 8px;
+  &.completed {
+    text-decoration: line-through;
+  }
 
   
   & :first-child {
@@ -38,28 +41,34 @@ export const WrapperHeader = styled.div`
   }
 
   @media (max-width: 1024px) {
-    max-width: 70vw;
+    max-width: 40vw;
   }
 
   @media (max-width: 768px) {
-    max-width: 60vw;
+    max-width: 30vw;
     & :first-child {
       font-size: 16px;
     }
   }
 
   @media (max-width: 520px) {
-    max-width: 50vw;
+    max-width: 20vw;
     & :last-child {
       font-size: 14px;
     }
   }
 
   @media (max-width: 420px) {
-    max-width: 40vw;
+    max-width: 18vw;
   }
 
   @media (max-width: 360px) {
-    max-width: 30vw;
+    max-width: 12vw;
   }
+`
+
+export const WrapperIcons = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
 `

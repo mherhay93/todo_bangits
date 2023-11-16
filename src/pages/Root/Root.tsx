@@ -1,14 +1,31 @@
 import React from "react";
+import {FloatButton} from "antd";
+import {connect} from "react-redux";
+import {DeleteOutlined} from "@ant-design/icons";
 import Wrapper from "../../components/Layout/Wrapper";
 import FormCard from "../../components/FormCard/FormCard";
 import List from "../../components/List/List";
+import ModalTrash from "../../components/ModalTrash/Modal";
+import {IStore} from "../../redux/types";
+import {setModalVisible} from "../../redux/todo/todo";
 import {Title, WrapperComponent} from "./root.style";
 
-const Root: React.FC = () => {
+interface IProps {
+    setModalVisible: (isOpen: boolean) => void
+    modalVisible: boolean
+}
+
+const Root = ({setModalVisible, modalVisible}:IProps) => {
+    const handleClickModal = () => {
+        setModalVisible(!modalVisible)
+    }
+
+    console.log('modalVisible ------->', modalVisible)
+
     return (
         <Wrapper>
             <WrapperComponent>
-                <Title color="">
+                <Title>
                     Todo
                 </Title>
                 <FormCard/>
@@ -19,9 +36,31 @@ const Root: React.FC = () => {
                 </Title>
                 <List/>
             </WrapperComponent>
+            <FloatButton
+                onClick={handleClickModal}
+                icon={<DeleteOutlined />}
+                type="primary"
+                style={{ right: 94 }}
+            />
+            <ModalTrash
+                modalVisible={modalVisible}
+                onClick={handleClickModal}
+            />
         </Wrapper>
     
     )
 }
 
-export default Root;
+const mapStateToProps = (todo:IStore) => {
+    const {modalVisible} = todo.todo
+    return {
+      modalVisible
+  }
+}
+
+const mapDispatchToProps = (dispatch:any) => {
+  return {
+      setModalVisible: (isOpen:boolean) => dispatch(setModalVisible(isOpen))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Root);

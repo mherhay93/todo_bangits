@@ -3,7 +3,7 @@ import {Button, Input, Typography} from "antd";
 import dayjs from "dayjs";
 import {Formik} from "formik";
 import {IValue} from "../../../redux/types";
-import DateTimePicker from "../DatePicker/DateTimePicker";
+import DateTimePicker from "../../helpers/DatePicker/DateTimePicker";
 
 const {TextArea} = Input;
 
@@ -11,15 +11,16 @@ interface IProps {
     title: string;
     description: string;
     date: dayjs.Dayjs;
+    isChecked: boolean;
     id: number | string;
     onSave: (val:IValue) => void
 }
 
-const ItemChildren = ({title, description, date, id, onSave}: IProps) => {
+const ItemChildren = ({title, description, date, id, isChecked, onSave}: IProps) => {
 
     return (
         <Formik
-            initialValues={{title, description, date, id}}
+            initialValues={{title, description, date, id, isChecked}}
             onSubmit={(values) => {
                 onSave(values)
             }}

@@ -10,6 +10,5 @@ export const Title = styled(Typography)`
   font-weight: bold;
   padding: 10px 0;
   text-align: center;
-  text-decoration: underline;
   color: #1677FF;
 `
