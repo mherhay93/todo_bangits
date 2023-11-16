@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {Collapse} from 'antd';
+import {connect} from "react-redux";
 import dayjs from "dayjs";
 import {EditTwoTone} from "@ant-design/icons";
+import {setTodo} from "../../../redux/todo/todo";
+import {IValue} from "../../../redux/types";
 import ItemChildren from "./ItemChildren";
 import HeaderList from "./Header";
 
@@ -9,38 +12,54 @@ interface IProps {
     title: string;
     description: string;
     date: dayjs.Dayjs;
-    key: string | number
+    itemKey: string | number;
+    setTodo: (val:IValue) => void
 }
 
-const ListItem = ({title, description, date, key}: IProps) => {
+const ListItem = ({title, description, date, itemKey, setTodo}: IProps) => {
     const [activeKey, setActiveKey] = useState<string | number>('')
     const handleOpen = () => {
-        setActiveKey(key)
+        setActiveKey(itemKey)
     }
-    
+
+    const handleSave = (val:IValue) => {
+        setActiveKey(0)
+        setTodo(val)
+    }
+
+    const item = [{
+        key: itemKey,
+        label:(
+            <HeaderList
+                title={title}
+                description={description}
+                date={date}
+            />
+        ),
+        children: (
+            <ItemChildren
+                title={title}
+                description={description}
+                date={date}
+                onSave={handleSave}
+                id={itemKey}
+            />
+        )
+    }]
+
+    const createIcon = () => {
+      return (
+          <EditTwoTone
+              onClick={handleOpen}
+              style={{fontSize: 20}}
+          />
+      )
+    }
+
     return (
         <Collapse
-            items={[{
-                key,
-                label:(
-                    <HeaderList
-                        title={title}
-                        description={description}
-                    />
-                ),
-                children: (
-                    <ItemChildren
-                        title={title}
-                        description={description}
-                        date={date}
-                    />
-                )
-            }]}
-            expandIcon={() => (
-                <EditTwoTone
-                    onClick={handleOpen}
-                    style={{fontSize: 20}}
-                />)}
+            items={item}
+            expandIcon={createIcon}
             expandIconPosition="end"
             activeKey={activeKey}
             style={{overflow: "hidden"}}
@@ -48,4 +67,10 @@ const ListItem = ({title, description, date, key}: IProps) => {
     )
 };
 
-export default ListItem;
+const mapDispatchToProps = (dispatch:any) => {
+  return {
+      setTodo: (val:IValue) => dispatch(setTodo(val))
+  }
+}
+
+export default connect(null, mapDispatchToProps )(ListItem);

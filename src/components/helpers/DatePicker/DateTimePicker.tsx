@@ -13,8 +13,8 @@ const disabledDate: RangePickerProps['disabledDate'] = (current) => {
 interface IProps {
     name?: string,
     onChange?: (date:dayjs.Dayjs | null, dateString:string) => void,
-    onBlur?: any,
-    value: any
+    onBlur: any,
+    value: dayjs.Dayjs
 }
 
 const DateTimePicker = ({name, onChange, onBlur, value}: IProps) => {

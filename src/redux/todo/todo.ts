@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {IState} from "../types";
 
 
-const initialState:IState = {
+const initialState: IState = {
     todo: [],
 }
 
@@ -11,11 +11,19 @@ export const todoSlice = createSlice({
     initialState,
     reducers: {
         addItemTodo: (state, action) => {
-            return {...state, todo: state.todo.concat(action.payload)}
+            state.todo = [...state.todo, action.payload]
+            return
+        },
+        setTodo: (state, action) => {
+            const {id} = action.payload
+            state.todo = state.todo.map((item) => item.id === id ? action.payload : item
+            );
+            return
         }
-    }
+    },
 })
 
 export const {
-    addItemTodo
+    addItemTodo,
+    setTodo
 } = todoSlice.actions
