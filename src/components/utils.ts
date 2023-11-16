@@ -4,7 +4,7 @@ enum statuses {
     expired = 'gray'
 }
 
-export function addWrap(str: string, count: number = 100) {
+export function addWrap(str: string, count: number = 200) {
     if (str.includes(' ') || str.length < count) {
         return str
     }

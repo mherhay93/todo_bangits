@@ -13,12 +13,11 @@ export const todoSlice = createSlice({
     initialState,
     reducers: {
         addItemTodo: (state, action) => {
-            state.todo = [...state.todo, action.payload]
+            state.todo = [action.payload, ...state.todo]
         },
         setTodo: (state, action) => {
             const {id} = action.payload
-            state.todo = state.todo.map((item) => item.id === id ? action.payload : item
-            );
+            state.todo = state.todo.map((item) => item.id === id ? action.payload : item);
         },
         moveToTrash: (state, action) => {
             const id = action.payload

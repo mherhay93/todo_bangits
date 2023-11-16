@@ -19,9 +19,7 @@ const Root = ({setModalVisible, modalVisible}:IProps) => {
     const handleClickModal = () => {
         setModalVisible(!modalVisible)
     }
-
-    console.log('modalVisible ------->', modalVisible)
-
+    
     return (
         <Wrapper>
             <WrapperComponent>

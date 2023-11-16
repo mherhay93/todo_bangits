@@ -47,37 +47,46 @@ export const WrapperHeader = styled.div`
     font-size: 18px;
     font-weight: bold;
     overflow: hidden;
-    max-width: 78vw;
+    width: 100%;
   }
   
   & :last-child {
     font-weight: bold;
+    width: 100%;
   }
 
+  @media (max-width: 1440px) {
+    max-width: 56vw;
+  }
+
+  @media (max-width: 1200px) {
+    max-width: 60vw;
+  }
+  
   @media (max-width: 1024px) {
-    max-width: 40vw;
+    max-width: 70vw;
   }
 
   @media (max-width: 768px) {
-    max-width: 30vw;
+    max-width: 58vw;
     & :first-child {
       font-size: 16px;
     }
   }
 
   @media (max-width: 520px) {
-    max-width: 20vw;
+    max-width: 50vw;
     & :last-child {
       font-size: 14px;
     }
   }
 
   @media (max-width: 420px) {
-    max-width: 18vw;
+    max-width: 46vw;
   }
 
   @media (max-width: 360px) {
-    max-width: 12vw;
+    max-width: 36vw;
   }
 `
 
