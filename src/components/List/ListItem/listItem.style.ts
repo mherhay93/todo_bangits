@@ -4,16 +4,30 @@ export const WrapperChildren = styled.form`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 export const ChildrenBody = styled.div`
   display: flex;
   align-items: flex-start;
+  margin-right: 20px;
+  margin-bottom: 0;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 10px;
+    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+  }
 `
 
 export const LabelItem = styled.label`
-
+  width: 100%;
 `
 
 export const WrapperHeader = styled.div`

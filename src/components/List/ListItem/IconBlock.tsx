@@ -2,6 +2,7 @@ import React from "react";
 import {DeleteTwoTone, EditTwoTone} from "@ant-design/icons";
 import {WrapperIcons} from "./listItem.style";
 import {Switch} from "antd";
+import Popover from "../../helpers/Popconfirm/Popconfirm";
 
 interface IProps {
     handleOpen: () => void
@@ -16,10 +17,16 @@ const IconBlock = ({handleOpen, handleDelete, handleCheck}: IProps) => {
                 onClick={handleOpen}
                 style={{fontSize: 20}}
             />
-            <DeleteTwoTone
-                onClick={handleDelete}
-                style={{fontSize: 20}}
-            />
+            <Popover
+                onOk={handleDelete}
+                text={'Task moved to trash'}
+                textTitle={'Do you want to move the task to the trash'}
+
+            >
+                <DeleteTwoTone
+                    style={{fontSize: 20}}
+                />
+            </Popover>
             <Switch
                 checkedChildren="X"
                 unCheckedChildren="V"

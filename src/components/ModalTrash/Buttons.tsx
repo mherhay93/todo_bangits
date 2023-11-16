@@ -3,6 +3,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {deleteItem, returnTodo} from "../../redux/todo/todo";
 import {WrapperButtons} from "./trash.style";
+import Popconfirm from "../helpers/Popconfirm/Popconfirm";
 
 interface IProps {
     returnTodo: (id: number | string) => void;
@@ -25,10 +26,16 @@ const Buttons = ({returnTodo, deleteItem, itemId}: IProps) => {
                 onClick={handleReturn}
                 style={{fontSize: 20}}
             />
-            <DeleteOutlined
-                onClick={handleDelete}
-                style={{fontSize: 20}}
-            />
+            <Popconfirm
+                onOk={handleDelete}
+                text="Task is deleted"
+                textDescription="Are you sure to delete this task?"
+                textTitle="Delete the task"
+            >
+                <DeleteOutlined
+                    style={{fontSize: 20}}
+                />
+            </Popconfirm>
         </WrapperButtons>
     )
 }
